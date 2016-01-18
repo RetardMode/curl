@@ -124,7 +124,11 @@ EXP_FUNC void STDCALL RNG_initialize()
     /* start of with a stack to copy across */
     int i;
     memcpy(entropy_pool, &i, ENTROPY_POOL_SIZE);
-    srand((unsigned int)&i); 
+    #ifdef HXCPP_M64 /* 64bit support */
+    srand((unsigned long long)&i); 
+    #else
+    srand((unsigned int)&i);
+    #endif
 #endif
 }
 
