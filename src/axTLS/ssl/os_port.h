@@ -98,7 +98,11 @@ extern "C" {
 #define strdup(A)               _strdup(A)
 #define chroot(A)               _chdir(A)
 #define chdir(A)                _chdir(A)
+#ifndef __MINGW32__ /* mingw support -> got alloca in malloc.h */
 #define alloca(A)               _alloca(A)
+#else
+#include <malloc.h>
+#endif /* end mingw support */
 #ifndef lseek
 #define lseek(A,B,C)            _lseek(A,B,C)
 #endif
@@ -117,8 +121,12 @@ extern "C" {
 
 typedef int socklen_t;
 
+#ifndef __MINGW32__ /* mingw support -> got gettimeofday in sys/time.h and strcasecmp */
 EXP_FUNC void STDCALL gettimeofday(struct timeval* t,void* timezone);
 EXP_FUNC int STDCALL strcasecmp(const char *s1, const char *s2);
+#else 
+#include <sys/time.h>
+#endif /* end mingw support */
 EXP_FUNC int STDCALL getdomainname(char *buf, int buf_size);
 
 #else   /* Not Win32 */
