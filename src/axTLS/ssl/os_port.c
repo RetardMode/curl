@@ -43,6 +43,7 @@
 /**
  * gettimeofday() not in Win32 
  */
+ #ifndef __MINGW32__ /* mingw support -> got gettimeofday and strcasecmp */
 EXP_FUNC void STDCALL gettimeofday(struct timeval* t, void* timezone)
 {       
 #if defined(_WIN32_WCE)
@@ -72,6 +73,7 @@ EXP_FUNC int STDCALL strcasecmp(const char *s1, const char *s2)
     return *(unsigned char *)s1 - *(unsigned char *)(s2 - 1);
 }
 
+#endif /* end mingw support */
 
 EXP_FUNC int STDCALL getdomainname(char *buf, int buf_size)
 {
