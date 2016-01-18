@@ -110,7 +110,7 @@
 /*
  * BigInt Options
  */
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
 #include <stdint.h>
 #else
 typedef unsigned int uint32_t;
