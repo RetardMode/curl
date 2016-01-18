@@ -61,7 +61,7 @@ typedef uint16_t comp;	        /**< A single precision component. */
 typedef uint32_t long_comp;     /**< A double precision component. */
 typedef int32_t slong_comp;     /**< A signed double precision component. */
 #else /* regular 32 bit */
-#ifdef WIN32
+#if defined(WIN32) && !defined(__MINGW32__) 
 #define COMP_RADIX          4294967296i64         
 #define COMP_MAX            0xFFFFFFFFFFFFFFFFui64
 #else
